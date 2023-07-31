@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const Filter = () => {
-
+const [filter, setFilter] = useState({})
   return (
     <div className = "filter">
         <nav>
@@ -9,32 +9,32 @@ const Filter = () => {
         <div className = "fuel-type">Fuel Type
         <ul>
             <input type="radio" id="gas" name="fuel-type" value="gas"/>
-            <label for="html">Gas</label>
+            <label for="fuel-type">Gas</label>
             <input type="radio" id="electricity" name="fuel-type" value="electricity"/>
-            <label for="css">Electric</label>
+            <label for="fuel-type">Electric</label>
             </ul>
         </div>
         <div className = "transmission">Transmission
             <ul>
             <input type="radio" id="automatic" name="transmission" value="a"/>
-            <label for="html">Automatic</label>
+            <label for="transmission">Automatic</label>
             <input type="radio" id="manual" name="transmission" value="m"/>
-            <label for="css">Manual</label>
+            <label for="transmission">Manual</label>
             </ul>
         </div>           
         <div className = "drivetrain">Drivetrain
             <ul>
             <input type="radio" id="fwd" name="drivetrain" value="fwd"/>
-            <label for="html">Front Wheel Drive</label>
+            <label for="drivetrain">Front Wheel Drive</label>
             <input type="radio" id="rwd" name="drivetrain" value="rwd"/>
-            <label for="css">Rear Wheel Drive</label>
+            <label for="drivetrain">Rear Wheel Drive</label>
             <input type="radio" id="awd" name="drivetrain" value="awd"/>
-            <label for="css">All Wheel Drive</label>
+            <label for="drivetrain">All Wheel Drive</label>
             </ul>
         </div>
         <div className = "make">Make
-            <select name ="make" id = "make" placeholder ="asd" >
-                <option value="" disabled selected>Select Manufacturer</option>
+            <select name ="make" id = "make" >
+                <option value="" disabled defaultValue>Select Manufacturer</option>
                 <option value = "acura">Acura</option>
                 <option value = "audi">Audi</option>
                 <option value = "bmw">BMW</option>
@@ -65,21 +65,24 @@ const Filter = () => {
         <div className = "cylinders">Cylinders
             <ul>
             <input type="radio" id="3" name="cylinders" value="3"/>
-            <label for="html">3 Cylinder</label>
+            <label for="cylinders">3 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="4"/>
-            <label for="html">4 Cylinder</label>
+            <label for="cylinders">4 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="5"/>
-            <label for="html">5 Cylinder</label>
+            <label for="cylinders">5 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="6"/>
-            <label for="html">6 Cylinder</label>
+            <label for="cylinders">6 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="8"/>
-            <label for="html">8 Cylinder</label>
+            <label for="cylinders">8 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="10"/>
-            <label for="html">10 Cylinder</label>
+            <label for="cylinders">10 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="12"/>
-            <label for="html">12 Cylinder</label>
+            <label for="cylinders">12 Cylinder</label>
+            <input type="radio" id="any" name="cylinders" value=""/>
+            <label for="cylinders">Any</label>
             </ul>
         </div>
+        <button >Search</button>
         </form>
         </nav>
     </div>

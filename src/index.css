@@ -15,11 +15,11 @@ code {
 .header{
   width:26vw;
   padding:5px;
-  background-color: rgba(177, 177, 177, 0.4);
+  background-color: rgba(177, 177, 177, 40%);
 }
 
 .app{
   display:flex;
   margin:5px;
-  background-color: rgb(146, 184, 255);
+  background-color: rgb(113, 163, 255);
 }

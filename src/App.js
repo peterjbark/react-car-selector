@@ -5,9 +5,10 @@ function App() {
   return (
     <div className="app">
       <header className = "header">
+      <h1>Car Selector</h1>
         <Filter/>
       </header>
-      <main>
+      <main className = "main">
         <Display/>
       </main>
     </div>
