@@ -1,41 +1,82 @@
 import React, { useState } from 'react'
 
 const Filter = () => {
-const [filter, setFilter] = useState({})
+
+const [filter, setFilter] = useState({});
+
+const handleChangeFuel = (event) =>{
+      setFilter((currentState) =>{
+        return {...currentState, fuel: event.target.value }
+        })
+       }
+
+const handleChangeTransmission = (event) =>{
+      setFilter((currentState) =>{
+        return {...currentState, transmission: event.target.value }
+ })
+}
+
+const handleChangeDrive = (event) =>{
+      setFilter((currentState) =>{
+        return {...currentState, drivetrain: event.target.value }
+ })
+}
+
+const handleChangeMake = (event) =>{
+      setFilter((currentState) =>{
+        return {...currentState, make: event.target.value } 
+ })
+}
+
+const handleChangeCylinders = (event) =>{
+      setFilter((currentState) =>{
+       return {...currentState, cylinders: event.target.value }
+ })
+}
+
+const handleReset = () =>{
+        console.log("Reset")
+}
+
+const handleSearch = (event) =>{
+        event.preventDefault();
+        console.log(filter)
+}
+
   return (
-    <div className = "filter">
+    <div className = "filter-menu">
         <nav>
         <form className = "car-filter">
         <div className = "fuel-type">Fuel Type
         <ul>
-            <input type="radio" id="gas" name="fuel-type" value="gas"/>
+            <input type="radio" id="gas" name="fuel-type" value="gas" onChange = {handleChangeFuel}/>
             <label for="fuel-type">Gas</label>
-            <input type="radio" id="electricity" name="fuel-type" value="electricity"/>
+            <input type="radio" id="electricity" name="fuel-type" value="electricity" onChange = {handleChangeFuel}/>
             <label for="fuel-type">Electric</label>
             </ul>
         </div>
         <div className = "transmission">Transmission
             <ul>
-            <input type="radio" id="automatic" name="transmission" value="a"/>
+            <input type="radio" id="automatic" name="transmission" value="a" onChange = {handleChangeTransmission}/>
             <label for="transmission">Automatic</label>
-            <input type="radio" id="manual" name="transmission" value="m"/>
+            <input type="radio" id="manual" name="transmission" value="m" onChange = {handleChangeTransmission}/>
             <label for="transmission">Manual</label>
             </ul>
         </div>           
         <div className = "drivetrain">Drivetrain
             <ul>
-            <input type="radio" id="fwd" name="drivetrain" value="fwd"/>
+            <input type="radio" id="fwd" name="drivetrain" value="fwd" onChange = {handleChangeDrive}/>
             <label for="drivetrain">Front Wheel Drive</label>
-            <input type="radio" id="rwd" name="drivetrain" value="rwd"/>
+            <input type="radio" id="rwd" name="drivetrain" value="rwd" onChange = {handleChangeDrive}/>
             <label for="drivetrain">Rear Wheel Drive</label>
-            <input type="radio" id="awd" name="drivetrain" value="awd"/>
+            <input type="radio" id="awd" name="drivetrain" value="awd" onChange = {handleChangeDrive}/>
             <label for="drivetrain">All Wheel Drive</label>
             </ul>
         </div>
         <div className = "make">Make
-            <select name ="make" id = "make" >
+            <select onChange = {handleChangeMake} value = {filter.make} name ="make" id = "make" >
                 <option value="" disabled defaultValue>Select Manufacturer</option>
-                <option value = "acura">Acura</option>
+                <option value = "acura" >Acura</option>
                 <option value = "audi">Audi</option>
                 <option value = "bmw">BMW</option>
                 <option value = "cadillac">Cadillac</option>
@@ -64,25 +105,28 @@ const [filter, setFilter] = useState({})
         </div>
         <div className = "cylinders">Cylinders
             <ul>
-            <input type="radio" id="3" name="cylinders" value="3"/>
+            <input type="radio" id="3" name="cylinders" value="3" onChange = {handleChangeCylinders}/>
             <label for="cylinders">3 Cylinder</label>
-            <input type="radio" id="3" name="cylinders" value="4"/>
+            <input type="radio" id="3" name="cylinders" value="4" onChange = {handleChangeCylinders}/>
             <label for="cylinders">4 Cylinder</label>
-            <input type="radio" id="3" name="cylinders" value="5"/>
+            <input type="radio" id="3" name="cylinders" value="5" onChange = {handleChangeCylinders}/>
             <label for="cylinders">5 Cylinder</label>
-            <input type="radio" id="3" name="cylinders" value="6"/>
+            <input type="radio" id="3" name="cylinders" value="6" onChange = {handleChangeCylinders}/>
             <label for="cylinders">6 Cylinder</label>
-            <input type="radio" id="3" name="cylinders" value="8"/>
+            <input type="radio" id="3" name="cylinders" value="8" onChange = {handleChangeCylinders}/>
             <label for="cylinders">8 Cylinder</label>
-            <input type="radio" id="3" name="cylinders" value="10"/>
+            <input type="radio" id="3" name="cylinders" value="10" onChange = {handleChangeCylinders}/>
             <label for="cylinders">10 Cylinder</label>
-            <input type="radio" id="3" name="cylinders" value="12"/>
+            <input type="radio" id="3" name="cylinders" value="12" onChange = {handleChangeCylinders}/>
             <label for="cylinders">12 Cylinder</label>
-            <input type="radio" id="any" name="cylinders" value=""/>
+            <input type="radio" id="any" name="cylinders" value="" onChange = {handleChangeCylinders}/>
             <label for="cylinders">Any</label>
             </ul>
         </div>
-        <button >Search</button>
+        <div className="preferences"></div>
+        <br></br>
+        <button onClick = {handleReset}>Reset</button>
+        <button onClick = {handleSearch}>Search</button>
         </form>
         </nav>
     </div>

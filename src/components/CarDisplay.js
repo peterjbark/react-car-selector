@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useParams} from 'react'
+import React, { useState} from 'react'
+import CarCard from './CarCard'
 
 const apiKey = "jVxxpkyGze5aZyaEk8ILog==rt9r1ILLfDoCqhp9"
+let make = "toyota"
 let model = "camry"
 
-const Display = () => {
+const CarDisplay = () => {
 
-    const [carSpecs, setCarSpecs] = useState('')
+    const [car, setCar] = useState()
 
     const options = {
       method: "GET",
@@ -15,22 +17,22 @@ const Display = () => {
       contentType: 'application/json',
     }
 
-    const baseURL = "https://api.api-ninjas.com/v1/cars?limit=2&model=" + model
+    const baseURL = "https://api.api-ninjas.com/v1/cars?limit=5&make=" + make
 
-    async function getCamry(){
+    async function getCar(){
       const response = await fetch(baseURL, options)
       const data = await response.json()
-      console.log(data[0])
+      console.log(data)
       console.log(data[0].make + " " + data[0].model + " " + data[0].class )
     }
 
   return (
-    <div>
+    <div className = "display">
         <h1>Car Specs</h1>
-        <h2>{carSpecs}</h2>
-        <button onClick = {getCamry}>Reset</button>
+        <div>{car}</div>
+        <button onClick = {getCar}>Search</button>
     </div>
   )
 }
 
-export default Display
+export default CarDisplay
