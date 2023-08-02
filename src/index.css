@@ -12,14 +12,22 @@ code {
     monospace;
 }
 
-.header{
-  width:26vw;
-  padding:5px;
-  background-color: rgba(177, 177, 177, 40%);
-}
-
 .app{
   display:flex;
-  margin:5px;
   background-color: rgb(113, 163, 255);
+  width:100vw;
+  height:50vw;
 }
+
+.title{
+  background-color: rgb(130, 152, 212);
+  text-align:center;
+  width:50vw;
+}
+.header{
+  width:50vw;
+  background-color: rgba(94, 89, 89, 0.4);
+}
+
+.filter-menu{
+width:90vw;}

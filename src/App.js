@@ -10,12 +10,12 @@ function App() {
   return (
     <div className="app">
       <header className = "header">
-      <h1>Car Selector</h1>
-        <Filter/>
+        <h1 className = "title">Car Finder</h1>
       </header>
-      {/* <main className = "main">
+      <main className = "main">
+        <Filter/>
         <CarDisplay/>
-      </main> */}
+      </main>
     </div>
   );
 }

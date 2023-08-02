@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 
+const apiKey = "jVxxpkyGze5aZyaEk8ILog==rt9r1ILLfDoCqhp9"
+
 const Filter = () => {
 
 const [filter, setFilter] = useState({});
+
 
 const handleChangeFuel = (event) =>{
       setFilter((currentState) =>{
@@ -34,8 +37,10 @@ const handleChangeCylinders = (event) =>{
  })
 }
 
-const handleReset = () =>{
-        console.log("Reset")
+const handleReset = (event) =>{
+  event.preventDefault()
+  setFilter("")
+  console.log(filter + "reset")
 }
 
 const handleSearch = (event) =>{
@@ -43,36 +48,33 @@ const handleSearch = (event) =>{
         console.log(filter)
 }
 
+
+const options = {
+  method: "GET",
+  headers: {
+    "X-Api-Key": apiKey
+  },
+  contentType: 'application/json',
+}
+
+const baseURL = "https://api.api-ninjas.com/v1/cars?limit=5&make="+ filter.make + "&transmission=" + filter.transmission + "&drive=" + filter.drivetrain + "&cylinders=" + filter.cylinders
+
+async function getCar(event){
+  try{
+  event.preventDefault();
+  const response = await fetch(baseURL, options)
+  const data = await response.json()
+  console.log(data)
+  console.log(data[0].make + " " + data[0].model + " " + data[0].class )
+  }catch (error){
+    console.log("Car with these specifications not found")
+  }
+}
+
   return (
     <div className = "filter-menu">
         <nav>
         <form className = "car-filter">
-        <div className = "fuel-type">Fuel Type
-        <ul>
-            <input type="radio" id="gas" name="fuel-type" value="gas" onChange = {handleChangeFuel}/>
-            <label for="fuel-type">Gas</label>
-            <input type="radio" id="electricity" name="fuel-type" value="electricity" onChange = {handleChangeFuel}/>
-            <label for="fuel-type">Electric</label>
-            </ul>
-        </div>
-        <div className = "transmission">Transmission
-            <ul>
-            <input type="radio" id="automatic" name="transmission" value="a" onChange = {handleChangeTransmission}/>
-            <label for="transmission">Automatic</label>
-            <input type="radio" id="manual" name="transmission" value="m" onChange = {handleChangeTransmission}/>
-            <label for="transmission">Manual</label>
-            </ul>
-        </div>           
-        <div className = "drivetrain">Drivetrain
-            <ul>
-            <input type="radio" id="fwd" name="drivetrain" value="fwd" onChange = {handleChangeDrive}/>
-            <label for="drivetrain">Front Wheel Drive</label>
-            <input type="radio" id="rwd" name="drivetrain" value="rwd" onChange = {handleChangeDrive}/>
-            <label for="drivetrain">Rear Wheel Drive</label>
-            <input type="radio" id="awd" name="drivetrain" value="awd" onChange = {handleChangeDrive}/>
-            <label for="drivetrain">All Wheel Drive</label>
-            </ul>
-        </div>
         <div className = "make">Make
             <select onChange = {handleChangeMake} value = {filter.make} name ="make" id = "make" >
                 <option value="" disabled defaultValue>Select Manufacturer</option>
@@ -103,6 +105,33 @@ const handleSearch = (event) =>{
                 <option value = "volkswagen">Volkswagen</option>
             </select>
         </div>
+        <br></br>
+        <div className = "fuel-type">Fuel Type
+        <ul>
+            <input type="radio" id="gas" name="fuel-type" value="gas" onChange = {handleChangeFuel} />
+            <label for="fuel-type">Gas</label>
+            <input type="radio" id="electricity" name="fuel-type" value="electricity"  onChange = {handleChangeFuel} />
+            <label for="fuel-type">Electric</label>
+            </ul>
+        </div>
+        <div className = "transmission">Transmission
+            <ul>
+            <input type="radio" id="automatic" name="transmission" value="a" onChange = {handleChangeTransmission}/>
+            <label for="transmission">Automatic</label>
+            <input type="radio" id="manual" name="transmission" value="m" onChange = {handleChangeTransmission}/>
+            <label for="transmission">Manual</label>
+            </ul>
+        </div>           
+        <div className = "drivetrain">Drivetrain
+            <ul>
+            <input type="radio" id="fwd" name="drivetrain" value="fwd" onChange = {handleChangeDrive}/>
+            <label for="drivetrain">Front Wheel Drive</label>
+            <input type="radio" id="rwd" name="drivetrain" value="rwd" onChange = {handleChangeDrive}/>
+            <label for="drivetrain">Rear Wheel Drive</label>
+            <input type="radio" id="awd" name="drivetrain" value="awd" onChange = {handleChangeDrive}/>
+            <label for="drivetrain">All Wheel Drive</label>
+            </ul>
+        </div>
         <div className = "cylinders">Cylinders
             <ul>
             <input type="radio" id="3" name="cylinders" value="3" onChange = {handleChangeCylinders}/>
@@ -123,12 +152,13 @@ const handleSearch = (event) =>{
             <label for="cylinders">Any</label>
             </ul>
         </div>
-        <div className="preferences"></div>
         <br></br>
+        <button onClick = {getCar}>Online Search</button>
+        <button onClick = {handleSearch}>Testing Filter Functionality</button>
         <button onClick = {handleReset}>Reset</button>
-        <button onClick = {handleSearch}>Search</button>
         </form>
         </nav>
+    
     </div>
   )
 }
