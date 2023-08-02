@@ -14,7 +14,6 @@ function App() {
       </header>
       <main className = "main">
         <Filter/>
-        <CarDisplay/>
       </main>
     </div>
   );

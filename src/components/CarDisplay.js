@@ -1,13 +1,12 @@
-import React, { useState} from 'react'
-import Filter from './Filter'
-import CarCard from './CarCard'
+import React from 'react'
 
-const CarDisplay = () => {
-
+const CarDisplay = (car) => {
 
   return (
-    <div className = "display">
+    <div className = "car">
+      <h1>{car.make}</h1>
+      <h3>{car.model}</h3>
     </div>
-  )
+    )
   }
 export default CarDisplay

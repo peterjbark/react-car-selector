@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import CarDisplay from './CarDisplay';
 
+// Incorporate logic that clears previous States upon clicking "Online Search" button
 const apiKey = "jVxxpkyGze5aZyaEk8ILog==rt9r1ILLfDoCqhp9"
 
 const Filter = () => {
 
 const [filter, setFilter] = useState({});
-
+const [car, setCar] = useState([]);
 
 const handleChangeFuel = (event) =>{
       setFilter((currentState) =>{
@@ -57,7 +59,7 @@ const options = {
   contentType: 'application/json',
 }
 
-const baseURL = "https://api.api-ninjas.com/v1/cars?limit=5&make="+ filter.make + "&transmission=" + filter.transmission + "&drive=" + filter.drivetrain + "&cylinders=" + filter.cylinders
+const baseURL = "https://api.api-ninjas.com/v1/cars?limit=1&make="+ filter.make + "&transmission=" + filter.transmission + "&drive=" + filter.drivetrain + "&cylinders=" + filter.cylinders
 
 async function getCar(event){
   try{
@@ -66,8 +68,10 @@ async function getCar(event){
   const data = await response.json()
   console.log(data)
   console.log(data[0].make + " " + data[0].model + " " + data[0].class )
-  }catch (error){
-    console.log("Car with these specifications not found")
+  setCar(data);
+  console.log(car)
+    } catch (error){
+       console.log("Car with these specifications not found")
   }
 }
 
@@ -158,7 +162,17 @@ async function getCar(event){
         <button onClick = {handleReset}>Reset</button>
         </form>
         </nav>
-    
+      <div>
+      {car.map((cars) =>{
+        return(
+          <CarDisplay
+           key ={cars.id}
+           make = {cars.make}
+           model = {cars.model}
+          />
+        )
+      })}
+     </div>
     </div>
   )
 }

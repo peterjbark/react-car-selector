@@ -14,20 +14,31 @@ code {
 
 .app{
   display:flex;
-  background-color: rgb(113, 163, 255);
-  width:100vw;
-  height:50vw;
+  justify-content: center;
+  background-color: rgb(121, 121, 121);
+  border: solid rgb(100, 184, 223);
 }
 
-.title{
-  background-color: rgb(130, 152, 212);
-  text-align:center;
-  width:50vw;
-}
 .header{
-  width:50vw;
-  background-color: rgba(94, 89, 89, 0.4);
+  border: solid black;
 }
-
+.title{
+  border: solid rgb(0, 0, 0);
+}
+.main{
+  border: solid black;
+}
 .filter-menu{
-width:90vw;}
+  border: solid black;
+
+}
+.display{
+  border: solid black;
+
+}
+button {
+  color:rgb(0, 0, 0);
+  background-color: aliceblue;
+  border-radius: 3px;
+  margin:5px;
+}
