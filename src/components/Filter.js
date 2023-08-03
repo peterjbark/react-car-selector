@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import CarDisplay from './CarDisplay';
 
-// Incorporate logic that clears previous States upon clicking "Online Search" button
+// Incorporate logic that clears previous States upon clicking "Online Search" button.
+// Increase limit param in URL and incorporate randomize logic that selects a random index from the retrieved data to show varying models of a make.
+// Unsplash API stockphoto selection not ideal for obtaining stock photos for specific cars
+// Attempting to change image URL prop when calling getCar.
+
 const apiKey = "jVxxpkyGze5aZyaEk8ILog==rt9r1ILLfDoCqhp9"
+const imageApiKey = "JHUj0_nLA4ODQnc3w9NZsapvOUJQi32kAlrCe6K4rRA"
 
 const Filter = () => {
 
 const [filter, setFilter] = useState({});
 const [car, setCar] = useState([]);
+const [image,setImage] = useState([]);
 
 const handleChangeFuel = (event) =>{
       setFilter((currentState) =>{
@@ -41,20 +47,22 @@ const handleChangeCylinders = (event) =>{
 
 const handleReset = (event) =>{
   event.preventDefault()
-  setFilter("")
+  setFilter()
+  
   console.log(filter + "reset")
 }
-
-const handleSearch = (event) =>{
-        event.preventDefault();
-        console.log(filter)
-}
-
 
 const options = {
   method: "GET",
   headers: {
     "X-Api-Key": apiKey
+  },
+  contentType: 'application/json',
+}
+
+const imgOptions = {
+  method: "GET",
+  headers: {
   },
   contentType: 'application/json',
 }
@@ -69,11 +77,27 @@ async function getCar(event){
   console.log(data)
   console.log(data[0].make + " " + data[0].model + " " + data[0].class )
   setCar(data);
-  console.log(car)
+  fetchImage();
     } catch (error){
        console.log("Car with these specifications not found")
   }
 }
+
+const imageURL = "https://api.unsplash.com/search/photos?page=1&query="+ filter.make + " " + filter.model + "&client_id=" + imageApiKey
+
+async function fetchImage(event){
+  try{
+  event.preventDefault();
+  const response = await fetch(imageURL, imgOptions)
+  const data = await response.json()
+  setImage(data.results[0].urls.regular);
+  console.log(image)
+
+} catch (error){
+  console.log("Image not found")
+}
+}
+
 
   return (
     <div className = "filter-menu">
@@ -132,8 +156,11 @@ async function getCar(event){
             <label for="drivetrain">Front Wheel Drive</label>
             <input type="radio" id="rwd" name="drivetrain" value="rwd" onChange = {handleChangeDrive}/>
             <label for="drivetrain">Rear Wheel Drive</label>
+            <br></br>
             <input type="radio" id="awd" name="drivetrain" value="awd" onChange = {handleChangeDrive}/>
             <label for="drivetrain">All Wheel Drive</label>
+            <input type="radio" id="4wd" name="drivetrain" value="4wd" onChange = {handleChangeDrive}/>
+            <label for="drivetrain">Four Wheel Drive</label>
             </ul>
         </div>
         <div className = "cylinders">Cylinders
@@ -146,6 +173,7 @@ async function getCar(event){
             <label for="cylinders">5 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="6" onChange = {handleChangeCylinders}/>
             <label for="cylinders">6 Cylinder</label>
+            <br></br>
             <input type="radio" id="3" name="cylinders" value="8" onChange = {handleChangeCylinders}/>
             <label for="cylinders">8 Cylinder</label>
             <input type="radio" id="3" name="cylinders" value="10" onChange = {handleChangeCylinders}/>
@@ -157,21 +185,21 @@ async function getCar(event){
             </ul>
         </div>
         <br></br>
-        <button onClick = {getCar}>Online Search</button>
-        <button onClick = {handleSearch}>Testing Filter Functionality</button>
+        <button onClick = {getCar}>Search</button>
         <button onClick = {handleReset}>Reset</button>
         </form>
         </nav>
-      <div>
-      {car.map((cars) =>{
-        return(
-          <CarDisplay
-           key ={cars.id}
-           make = {cars.make}
-           model = {cars.model}
-          />
-        )
+
+      <div className='result'>
+        {car.map((cars) =>{
+          return(
+            <CarDisplay
+              key ={cars.id}
+              make = {cars.make.toUpperCase()}
+              model = {cars.model.toUpperCase()}
+              />)
       })}
+      <img src = {image}/>
      </div>
     </div>
   )

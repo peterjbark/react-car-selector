@@ -1,16 +1,18 @@
 import React from "react";
 import Filter from "./components/Filter";
-import CarDisplay from "./components/CarDisplay";
-
-// Display component should show attributes selected from Filter component, with option to "X" the attribute and reset it the value to " ".
-// Reset button should clear the display and reset query 
-// Search button will submit selected attributes to be used in the data fetch, with appropriate terms (model, make, drivetrain, fuel type)
+import {useSelector, useDispatch} from 'react-redux';
+import { toggleDarkMode } from "./features/darkModeSlice";
 
 function App() {
+  const {mode} = useSelector((state)=>state.darkMode)
+  const dispatch = useDispatch();
+
   return (
-    <div className="app">
+    <div className="app" style ={{background:mode? '#454545' : '#D6D6D6' , color:mode? '#E2E2E2' : '#000000 '}}>
       <header className = "header">
-        <h1 className = "title">Car Finder</h1>
+        <h1 className = "title"  style ={{background:mode? '#666666 ' : '#CDCDCD ' , color:mode? '#FFFFFF' : '#000000 '}}>Find-A-Car</h1>
+        <button style ={{background:mode? '#454545' : '#D6D6D6' , color:mode? '#E2E2E2' : '#000000 '}} 
+        onClick = {() => dispatch(toggleDarkMode())}>&#127769;</button>
       </header>
       <main className = "main">
         <Filter/>
