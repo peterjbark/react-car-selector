@@ -1,3 +1,5 @@
+The intended purpose for this project was to be able to display a number of cars based on a user's selections such as "drivetrain", "model", "make, "fuel-type" etc. An issue I experienced is that with the API used, I needed to incorporate logic that could accept "years" as there were multiple objects being returned that were the same car but with varying years. I also needed to incorporate my image fetching function more eloquently as right now it is manually operated by the user after submitting the initial search. Being able to include the "model" data automatically provided in the first filter state would be helpful but could not get to that in time. With some adjustments I can make the application run as intended.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
