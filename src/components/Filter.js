@@ -3,8 +3,8 @@ import CarDisplay from './CarDisplay';
 
 // Incorporate logic that clears previous States upon clicking "Online Search" button.
 // Increase limit param in URL and incorporate randomize logic that selects a random index from the retrieved data to show varying models of a make.
-// Unsplash API stockphoto selection not ideal for obtaining stock photos for specific cars
-// Attempting to change image URL prop when calling getCar.
+// Unsplash API stockphoto selection not ideal for obtaining stock photos for specific cars. Need to make URL param more specific or incorporate logic to exclude certain parameters.
+// Attempting to change image URL prop when calling getCar. URL is dependent on user selection that changes filter state.
 
 const apiKey = "jVxxpkyGze5aZyaEk8ILog==rt9r1ILLfDoCqhp9"
 const imageApiKey = "JHUj0_nLA4ODQnc3w9NZsapvOUJQi32kAlrCe6K4rRA"
@@ -186,7 +186,9 @@ async function fetchImage(event){
         </div>
         <br></br>
         <button onClick = {getCar}>Search</button>
+        <button onClick = {fetchImage}>Press After Search</button>
         <button onClick = {handleReset}>Reset</button>
+
         </form>
         </nav>
 
@@ -199,7 +201,7 @@ async function fetchImage(event){
               model = {cars.model.toUpperCase()}
               />)
       })}
-      <img src = {image}/>
+      <img className = "car-image" src = {image}/>
      </div>
     </div>
   )

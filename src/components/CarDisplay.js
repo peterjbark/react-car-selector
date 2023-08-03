@@ -7,7 +7,6 @@ const CarDisplay = (car, img) => {
     <div className = "car">
       <h1 className = "car-make">{car.make}</h1>
       <h3 className = "car-model">{car.model}</h3>
-      <img className = "car-image" src = {img.url} alt ="image from Unsplash"/>
     </div>
     )
   }
