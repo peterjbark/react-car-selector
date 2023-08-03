@@ -201,7 +201,7 @@ async function fetchImage(event){
               model = {cars.model.toUpperCase()}
               />)
       })}
-      <img className = "car-image" src = {image}/>
+      <img className = "car-image" src = {image} alt = "image provided by unsplash"/>
      </div>
     </div>
   )
